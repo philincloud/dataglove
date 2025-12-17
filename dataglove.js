@@ -1,3 +1,4 @@
+
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -400,17 +401,26 @@ function setupCheckboxControls() {
     });
 }
 
+
+
 // Function to toggle disk visibility
 function toggleDiskVisibility(disk, isVisible) {
+    console.log(`Toggling disk visibility - Visible: ${isVisible}`);
+    
     if (isVisible) {
         // Make disk visible (opaque)
         disk.material.transparent = false;
         disk.material.opacity = 1.0;
+        console.log(`Disk made visible with opacity: ${disk.material.opacity}`);
     } else {
         // Make disk transparent
         disk.material.transparent = true;
-        disk.material.opacity = 0.1; // Almost invisible but still clickable
+        disk.material.opacity = 0.0; // Completely invisible
+        console.log(`Disk made invisible with opacity: ${disk.material.opacity}`);
     }
+    
+    // Force update the material
+    disk.material.needsUpdate = true;
     
     // Re-render scene
     renderer.render(scene, camera);
