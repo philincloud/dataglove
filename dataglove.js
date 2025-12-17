@@ -43,7 +43,8 @@ function initThreeScene() {
         new THREE.Vector3(-2, 0, 0.02),
         new THREE.Vector3(2, 0, 0.02)
     ]);
-    const redLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000, linewidth: 3 });
+
+    const redLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000, linewidth: 5 });
     redLine = new THREE.Line(redLineGeometry, redLineMaterial);
     scene.add(redLine);
     
@@ -53,7 +54,8 @@ function initThreeScene() {
         new THREE.Vector3(0, -2, 0.02),
         new THREE.Vector3(0, 2, 0.02)
     ]);
-    const blueLineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 3 });
+
+    const blueLineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 5 });
     blueLine = new THREE.Line(blueLineGeometry, blueLineMaterial);
     scene.add(blueLine);
     
@@ -62,7 +64,8 @@ function initThreeScene() {
         new THREE.Vector3(0, 0, -3),
         new THREE.Vector3(0, 0, 3)
     ]);
-    const greenLineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 3 });
+
+    const greenLineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 5 });
     greenLine = new THREE.Line(greenLineGeometry, greenLineMaterial);
     scene.add(greenLine);
     
