@@ -115,6 +115,7 @@ function initThreeScene() {
 
 
 
+
     // Create yellow disk centered on the red point at 1/4 of red axis (x = -1)
     // Surface parallel to y/z plane
     const yellowDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.02, 32);
@@ -123,6 +124,13 @@ function initThreeScene() {
     yellowDisk.position.set(-1, 0, 0); // Center on the 1/4 point of red axis
     yellowDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(yellowDisk);
+    
+    // Create vertical line through yellow disk center (along y-axis)
+    const yellowLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 6, 16);
+    const yellowLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const yellowLine = new THREE.Mesh(yellowLineGeometry, yellowLineMaterial);
+    yellowLine.position.set(-1, 0, 0); // Center on yellow disk
+    sceneGroup.add(yellowLine);
     
 
     // Create light green disk centered on the red point at 3/4 of red axis (x = 1)
@@ -134,6 +142,13 @@ function initThreeScene() {
     lightGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(lightGreenDisk);
     
+    // Create vertical line through light green disk center (along y-axis)
+    const lightGreenLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 6, 16);
+    const lightGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const lightGreenLine = new THREE.Mesh(lightGreenLineGeometry, lightGreenLineMaterial);
+    lightGreenLine.position.set(1, 0, 0); // Center on light green disk
+    sceneGroup.add(lightGreenLine);
+    
 
     // Create dark green disk at the end of red x-axis line (x = 2)
     // Surface parallel to y/z plane
@@ -144,15 +159,46 @@ function initThreeScene() {
     darkGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(darkGreenDisk);
     
+    // Create vertical line through dark green disk center (along y-axis)
+    const darkGreenLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 4.2, 16);
+    const darkGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const darkGreenLine = new THREE.Mesh(darkGreenLineGeometry, darkGreenLineMaterial);
+    darkGreenLine.position.set(2, 0, 0); // Center on dark green disk
+    sceneGroup.add(darkGreenLine);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Create orange disk at the beginning of red x-axis line (x = -2)
-    // Surface parallel to y/z plane
+    // Surface parallel to y/z plane, same size as dark green disk (radius 2.1)
     const orangeDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.02, 32);
     const orangeDiskMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
     const orangeDisk = new THREE.Mesh(orangeDiskGeometry, orangeDiskMaterial);
     orangeDisk.position.set(-2, 0, 0); // Center on the beginning point of red axis
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(orangeDisk);
+    
+    // Create vertical line through orange disk center (along y-axis)
+    const orangeLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 4.2, 16);
+    const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const orangeLine = new THREE.Mesh(orangeLineGeometry, orangeLineMaterial);
+    orangeLine.position.set(-2, 0, 0); // Center on orange disk
+    sceneGroup.add(orangeLine);
     
     // Add lighting for better visibility
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
