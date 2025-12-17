@@ -9,8 +9,9 @@ function datagloveProcess(data) {
     return data;
 }
 
+
 // Global variables for scene objects
-let scene, camera, renderer, circle, redPoint, redLine, blueLine, greenLine;
+let scene, camera, renderer, sceneGroup; // Group to hold all rotatable objects
 
 // Three.js scene setup
 function initThreeScene() {
@@ -29,42 +30,42 @@ function initThreeScene() {
     
     camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     
+    // Create a group to hold all objects that should rotate together
+    sceneGroup = new THREE.Group();
+    scene.add(sceneGroup);
 
     // Create white disk with minimal thickness
     const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32);
     const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     circle = new THREE.Mesh(diskGeometry, diskMaterial);
-    scene.add(circle);
+    sceneGroup.add(circle);
     
-
-
 
     // Create red horizontal line across the disk (X-axis) - using BoxGeometry for actual thickness
-    const redLineGeometry = new THREE.BoxGeometry(4, 0.3, 0.3);
+    const redLineGeometry = new THREE.BoxGeometry(4, 0.5, 0.5);
     const redLineMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     redLine = new THREE.Mesh(redLineGeometry, redLineMaterial);
-    scene.add(redLine);
+    sceneGroup.add(redLine);
     
 
-
     // Create blue vertical line across the disk (Y-axis) - using BoxGeometry for actual thickness
-    const blueLineGeometry = new THREE.BoxGeometry(0.3, 4, 0.3);
+    const blueLineGeometry = new THREE.BoxGeometry(0.5, 4, 0.5);
     const blueLineMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
     blueLine = new THREE.Mesh(blueLineGeometry, blueLineMaterial);
-    scene.add(blueLine);
+    sceneGroup.add(blueLine);
     
 
     // Create green Z-axis line perpendicular to the disk - using BoxGeometry for actual thickness
-    const greenLineGeometry = new THREE.BoxGeometry(0.3, 0.3, 6);
+    const greenLineGeometry = new THREE.BoxGeometry(0.5, 0.5, 6);
     const greenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     greenLine = new THREE.Mesh(greenLineGeometry, greenLineMaterial);
-    scene.add(greenLine);
+    sceneGroup.add(greenLine);
     
     // Create red point in center
     const pointGeometry = new THREE.SphereGeometry(0.15, 16, 16);
     const pointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     redPoint = new THREE.Mesh(pointGeometry, pointMaterial);
-    scene.add(redPoint);
+    sceneGroup.add(redPoint);
     
     // Add lighting for better visibility
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
@@ -104,28 +105,8 @@ function setupControls() {
         const yaw = parseFloat(ySlider.value);
         const roll = parseFloat(zSlider.value);
         
-        // Rotate all objects together
-        circle.rotation.set(
-            THREE.MathUtils.degToRad(pitch),
-            THREE.MathUtils.degToRad(yaw),
-            THREE.MathUtils.degToRad(roll)
-        );
-        redPoint.rotation.set(
-            THREE.MathUtils.degToRad(pitch),
-            THREE.MathUtils.degToRad(yaw),
-            THREE.MathUtils.degToRad(roll)
-        );
-        redLine.rotation.set(
-            THREE.MathUtils.degToRad(pitch),
-            THREE.MathUtils.degToRad(yaw),
-            THREE.MathUtils.degToRad(roll)
-        );
-        blueLine.rotation.set(
-            THREE.MathUtils.degToRad(pitch),
-            THREE.MathUtils.degToRad(yaw),
-            THREE.MathUtils.degToRad(roll)
-        );
-        greenLine.rotation.set(
+        // Rotate the entire scene group
+        sceneGroup.rotation.set(
             THREE.MathUtils.degToRad(pitch),
             THREE.MathUtils.degToRad(yaw),
             THREE.MathUtils.degToRad(roll)
