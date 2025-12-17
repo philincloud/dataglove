@@ -41,24 +41,27 @@ function initThreeScene() {
     sceneGroup.add(circle);
     
 
-    // Create red horizontal line across the disk (X-axis) - using BoxGeometry for actual thickness
-    const redLineGeometry = new THREE.BoxGeometry(4, 0.5, 0.5);
+    // Create red horizontal line across the disk (X-axis) - using CylinderGeometry for round appearance
+    const redLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 4, 16);
     const redLineMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     redLine = new THREE.Mesh(redLineGeometry, redLineMaterial);
+    redLine.rotation.z = Math.PI / 2; // Rotate to align with X-axis
     sceneGroup.add(redLine);
     
 
-    // Create blue vertical line across the disk (Y-axis) - using BoxGeometry for actual thickness
-    const blueLineGeometry = new THREE.BoxGeometry(0.5, 4, 0.5);
+    // Create blue vertical line across the disk (Y-axis) - using CylinderGeometry for round appearance
+    const blueLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 4, 16);
     const blueLineMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
     blueLine = new THREE.Mesh(blueLineGeometry, blueLineMaterial);
+    // No rotation needed - cylinder by default aligns with Y-axis
     sceneGroup.add(blueLine);
     
 
-    // Create green Z-axis line perpendicular to the disk - using BoxGeometry for actual thickness
-    const greenLineGeometry = new THREE.BoxGeometry(0.5, 0.5, 6);
+    // Create green Z-axis line perpendicular to the disk - using CylinderGeometry for round appearance
+    const greenLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 6, 16);
     const greenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     greenLine = new THREE.Mesh(greenLineGeometry, greenLineMaterial);
+    greenLine.rotation.x = Math.PI / 2; // Rotate to align with Z-axis
     sceneGroup.add(greenLine);
     
     // Create red point in center
