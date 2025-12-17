@@ -37,6 +37,7 @@
         // Wait for DOM to load
         document.addEventListener('DOMContentLoaded', function() {
 
+
             // Scene setup
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
@@ -45,10 +46,17 @@
             renderer.setSize(window.innerWidth - 40, 400);
             document.getElementById('canvas-container').appendChild(renderer.domElement);
             
-            // Add lights
-            const light = new THREE.PointLight(0xffffff, 1);
-            light.position.set(10, 10, 10);
-            scene.add(light);
+            // Create white circle
+            const circleGeometry = new THREE.CircleGeometry(2, 32);
+            const circleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const circle = new THREE.Mesh(circleGeometry, circleMaterial);
+            scene.add(circle);
+            
+            // Create red point in center
+            const pointGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+            const pointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            const redPoint = new THREE.Mesh(pointGeometry, pointMaterial);
+            scene.add(redPoint);
             
             // Camera position
             camera.position.z = 5;
