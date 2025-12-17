@@ -10,15 +10,22 @@ function datagloveProcess(data) {
     return data;
 }
 
+
 // Three.js scene setup
 function initThreeScene() {
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
 
     renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
     document.getElementById('canvas-container').appendChild(renderer.domElement);
+    
+    // Calculate correct aspect ratio based on canvas size
+    const canvasWidth = window.innerWidth * 0.75;
+    const canvasHeight = window.innerHeight * 0.75;
+    const aspectRatio = canvasWidth / canvasHeight;
+    
+    const camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     
     // Create white circle
     const circleGeometry = new THREE.CircleGeometry(2, 32);
