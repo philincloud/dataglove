@@ -424,11 +424,9 @@ function setupControls() {
     // Setup color circle rotation controls
     setupColorCircleControls();
     
+
     // Setup checkbox visibility controls
     setupCheckboxControls();
-    
-    // Setup textbox button controls
-    setupTextboxControls();
 }
 
 
@@ -477,13 +475,16 @@ function setupCheckboxControls() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     console.log('Found checkboxes:', checkboxes.length);
     
+
     // Disk mapping: checkbox index → disk object
     const disks = [
         orangeDisk,      // index 0 - Orange
         yellowDisk,      // index 1 - Yellow
         circle3,         // index 2 - Dark Grey (using circle3 as it's the dark grey disk)
         lightGreenDisk,  // index 3 - Light Green
-        darkGreenDisk    // index 4 - Dark Green
+        darkGreenDisk,   // index 4 - Dark Green
+        circle,          // index 5 - White Circle
+        circle2          // index 6 - Light Gray Circle
     ];
     
     console.log('Available disks:', disks.length);
@@ -545,59 +546,7 @@ function toggleDiskVisibility(disk, isVisible) {
 }
 
 
-// Function to handle white circle button click
-function handleWhiteCircle() {
-    const input = document.getElementById('white-circle-input');
-    const text = input.value || 'White Circle';
-    console.log('White Circle button clicked with text:', text);
-    
-    // Add visual feedback - briefly change circle color
-    const originalColor = circle.material.color.clone();
-    circle.material.color.setHex(0xff6666); // Temporary red color
-    
-    // Restore original color after 300ms
-    setTimeout(() => {
-        circle.material.color.copy(originalColor);
-        renderer.render(scene, camera);
-    }, 300);
-    
-    // Re-render scene
-    renderer.render(scene, camera);
-}
 
-// Function to handle light gray circle button click
-function handleLightGrayCircle() {
-    const input = document.getElementById('light-gray-circle-input');
-    const text = input.value || 'Light Gray Circle';
-    console.log('Light Gray Circle button clicked with text:', text);
-    
-    // Add visual feedback - briefly change circle2 color
-    const originalColor = circle2.material.color.clone();
-    circle2.material.color.setHex(0x66ff66); // Temporary green color
-    
-    // Restore original color after 300ms
-    setTimeout(() => {
-        circle2.material.color.copy(originalColor);
-        renderer.render(scene, camera);
-    }, 300);
-    
-    // Re-render scene
-    renderer.render(scene, camera);
-}
-
-// Function to setup textbox button controls
-function setupTextboxControls() {
-    const whiteCircleButton = document.getElementById('white-circle-button');
-    const lightGrayCircleButton = document.getElementById('light-gray-circle-button');
-    
-    if (whiteCircleButton) {
-        whiteCircleButton.addEventListener('click', handleWhiteCircle);
-    }
-    
-    if (lightGrayCircleButton) {
-        lightGrayCircleButton.addEventListener('click', handleLightGrayCircle);
-    }
-}
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
