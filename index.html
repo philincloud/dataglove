@@ -50,11 +50,23 @@
             width: 140px;
         }
 
+
         .color-control {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            transform: scale(1.2);
         }
 
         .color-button {
@@ -140,28 +152,44 @@
         <p>3D scene using Three.js library.</p>
         
 
+
         <div class="color-buttons">
             <div class="color-control">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="orange-checkbox">
+                </div>
                 <button class="color-button orange-btn">Orange</button>
                 <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
                 <div class="slider-value">90°</div>
             </div>
             <div class="color-control">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="yellow-checkbox">
+                </div>
                 <button class="color-button yellow-btn">Yellow</button>
                 <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
                 <div class="slider-value">90°</div>
             </div>
             <div class="color-control">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="dark-grey-checkbox">
+                </div>
                 <button class="color-button dark-grey-btn">Dark Grey</button>
                 <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
                 <div class="slider-value">90°</div>
             </div>
             <div class="color-control">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="light-green-checkbox">
+                </div>
                 <button class="color-button light-green-btn">Light Green</button>
                 <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
                 <div class="slider-value">90°</div>
             </div>
             <div class="color-control">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="dark-green-checkbox">
+                </div>
                 <button class="color-button dark-green-btn">Dark Green</button>
                 <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
                 <div class="slider-value">90°</div>
