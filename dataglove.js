@@ -361,10 +361,12 @@ function setupColorCircleControls() {
     });
 }
 
+
 // Setup checkbox visibility controls
 function setupCheckboxControls() {
     // Get all checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    console.log('Found checkboxes:', checkboxes.length);
     
     // Disk mapping: checkbox index → disk object
     const disks = [
@@ -375,14 +377,26 @@ function setupCheckboxControls() {
         darkGreenDisk    // index 4 - Dark Green
     ];
     
+    console.log('Available disks:', disks.length);
+    
     // Add event listeners to each checkbox
     checkboxes.forEach((checkbox, index) => {
+        console.log(`Setting up checkbox ${index}:`, checkbox.id);
+        
         checkbox.addEventListener('change', function() {
+            console.log(`Checkbox ${index} (${checkbox.id}) changed to:`, this.checked);
+            
             // Toggle disk visibility based on checkbox state
             if (disks[index]) {
+                console.log(`Toggling disk ${index}:`, disks[index]);
                 toggleDiskVisibility(disks[index], this.checked);
+            } else {
+                console.log(`No disk found for index ${index}`);
             }
         });
+        
+        // Set default state (checked)
+        checkbox.checked = true;
     });
 }
 
