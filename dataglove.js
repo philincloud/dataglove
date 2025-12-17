@@ -29,25 +29,29 @@ function initThreeScene() {
     
     camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     
-    // Create white disk with proper thickness
-    const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.1, 32);
+
+    // Create white disk with minimal thickness
+    const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32);
     const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     circle = new THREE.Mesh(diskGeometry, diskMaterial);
     scene.add(circle);
     
+
+
     // Create red horizontal line across the disk (X-axis)
     const redLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(-2, 0, 0.06),
-        new THREE.Vector3(2, 0, 0.06)
+        new THREE.Vector3(-2, 0, 0.02),
+        new THREE.Vector3(2, 0, 0.02)
     ]);
     const redLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000, linewidth: 3 });
     redLine = new THREE.Line(redLineGeometry, redLineMaterial);
     scene.add(redLine);
     
+
     // Create blue vertical line across the disk (Y-axis)
     const blueLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, -2, 0.06),
-        new THREE.Vector3(0, 2, 0.06)
+        new THREE.Vector3(0, -2, 0.02),
+        new THREE.Vector3(0, 2, 0.02)
     ]);
     const blueLineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 3 });
     blueLine = new THREE.Line(blueLineGeometry, blueLineMaterial);
