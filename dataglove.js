@@ -19,8 +19,12 @@ let scene, camera, renderer, sceneGroup; // Group to hold all rotatable objects
 let circle, circle2, circle3, yellowDisk, lightGreenDisk, darkGreenDisk, orangeDisk;
 
 
+
 // Global variables for line objects
 let redLine, blueLine, greenLine, yellowLine, lightGreenLine, darkGreenLine, orangeLine, darkGreyLine;
+
+// Global variables for upper (rotatable) parts of line objects
+let orangeLineUpper, yellowLineUpper, darkGreyLineUpper, lightGreenLineUpper, darkGreenLineUpper;
 
 // Three.js scene setup
 function initThreeScene() {
@@ -73,12 +77,23 @@ function initThreeScene() {
     circle3.userData.originalColor = new THREE.Color(0x999999);
     sceneGroup.add(circle3);
     
+
     // Create vertical line through dark grey disk center (along y-axis)
-    const darkGreyLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 7.2, 16);
+    // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
+    
+    // Lower part: fixed from y=0 to y=-3.6 (half of 7.2)
+    const darkGreyLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3.6, 16);
     const darkGreyLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    darkGreyLine = new THREE.Mesh(darkGreyLineGeometry, darkGreyLineMaterial);
-    darkGreyLine.position.set(0, 0, 0); // Center on dark grey disk
+    darkGreyLine = new THREE.Mesh(darkGreyLineLowerGeometry, darkGreyLineMaterial);
+    darkGreyLine.position.set(0, -1.8, 0); // Position so top touches y=0
     sceneGroup.add(darkGreyLine);
+    
+    // Upper part: rotatable from y=0 to y=3.6 (half of 7.2)
+    const darkGreyLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3.6, 16);
+    const darkGreyLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    darkGreyLineUpper = new THREE.Mesh(darkGreyLineUpperGeometry, darkGreyLineUpperMaterial);
+    darkGreyLineUpper.position.set(0, 1.8, 0); // Position so bottom touches y=0
+    sceneGroup.add(darkGreyLineUpper);
 
 
     // Create red horizontal line across the disk (X-axis) - using CylinderGeometry for round appearance
@@ -161,12 +176,23 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through yellow disk center (along y-axis)
-    const yellowLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 6, 16);
+    // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
+    
+    // Lower part: fixed from y=0 to y=-3 (half of 6)
+    const yellowLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
     const yellowLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    yellowLine = new THREE.Mesh(yellowLineGeometry, yellowLineMaterial);
-    yellowLine.position.set(-1, 0, 0); // Center on yellow disk
+    yellowLine = new THREE.Mesh(yellowLineLowerGeometry, yellowLineMaterial);
+    yellowLine.position.set(-1, -1.5, 0); // Position so top touches y=0
     sceneGroup.add(yellowLine);
+    
+    // Upper part: rotatable from y=0 to y=3 (half of 6)
+    const yellowLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const yellowLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    yellowLineUpper = new THREE.Mesh(yellowLineUpperGeometry, yellowLineUpperMaterial);
+    yellowLineUpper.position.set(-1, 1.5, 0); // Position so bottom touches y=0
+    sceneGroup.add(yellowLineUpper);
     
 
 
@@ -188,12 +214,23 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through light green disk center (along y-axis)
-    const lightGreenLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 6, 16);
+    // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
+    
+    // Lower part: fixed from y=0 to y=-3 (half of 6)
+    const lightGreenLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
     const lightGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    lightGreenLine = new THREE.Mesh(lightGreenLineGeometry, lightGreenLineMaterial);
-    lightGreenLine.position.set(1, 0, 0); // Center on light green disk
+    lightGreenLine = new THREE.Mesh(lightGreenLineLowerGeometry, lightGreenLineMaterial);
+    lightGreenLine.position.set(1, -1.5, 0); // Position so top touches y=0
     sceneGroup.add(lightGreenLine);
+    
+    // Upper part: rotatable from y=0 to y=3 (half of 6)
+    const lightGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const lightGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    lightGreenLineUpper = new THREE.Mesh(lightGreenLineUpperGeometry, lightGreenLineUpperMaterial);
+    lightGreenLineUpper.position.set(1, 1.5, 0); // Position so bottom touches y=0
+    sceneGroup.add(lightGreenLineUpper);
     
 
 
@@ -215,12 +252,23 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through dark green disk center (along y-axis)
-    const darkGreenLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 4.2, 16);
+    // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
+    
+    // Lower part: fixed from y=0 to y=-2.1 (half of 4.2)
+    const darkGreenLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
     const darkGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    darkGreenLine = new THREE.Mesh(darkGreenLineGeometry, darkGreenLineMaterial);
-    darkGreenLine.position.set(2, 0, 0); // Center on dark green disk
+    darkGreenLine = new THREE.Mesh(darkGreenLineLowerGeometry, darkGreenLineMaterial);
+    darkGreenLine.position.set(2, -1.05, 0); // Position so top touches y=0
     sceneGroup.add(darkGreenLine);
+    
+    // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
+    const darkGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const darkGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    darkGreenLineUpper = new THREE.Mesh(darkGreenLineUpperGeometry, darkGreenLineUpperMaterial);
+    darkGreenLineUpper.position.set(2, 1.05, 0); // Position so bottom touches y=0
+    sceneGroup.add(darkGreenLineUpper);
     
 
     
@@ -244,12 +292,23 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through orange disk center (along y-axis)
-    const orangeLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 4.2, 16);
+    // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
+    
+    // Lower part: fixed from y=0 to y=-2.1 (half of 4.2)
+    const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    orangeLine = new THREE.Mesh(orangeLineGeometry, orangeLineMaterial);
-    orangeLine.position.set(-2, 0, 0); // Center on orange disk
+    orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
+    orangeLine.position.set(-2, -1.05, 0); // Position so top touches y=0
     sceneGroup.add(orangeLine);
+    
+    // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
+    const orangeLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const orangeLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    orangeLineUpper = new THREE.Mesh(orangeLineUpperGeometry, orangeLineUpperMaterial);
+    orangeLineUpper.position.set(-2, 1.05, 0); // Position so bottom touches y=0
+    sceneGroup.add(orangeLineUpper);
     
     // Add lighting for better visibility
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
@@ -340,13 +399,14 @@ function setupColorCircleControls() {
     const colorSliders = document.querySelectorAll('.color-slider');
     
 
-    // Line mapping: slider index → black line object
+
+    // Line mapping: slider index → black line object (using upper rotatable parts)
     const lines = [
-        orangeLine,      // index 0 - Orange
-        yellowLine,      // index 1 - Yellow
-        darkGreyLine,    // index 2 - Dark Grey
-        lightGreenLine,  // index 3 - Light Green
-        darkGreenLine    // index 4 - Dark Green
+        orangeLineUpper,      // index 0 - Orange
+        yellowLineUpper,      // index 1 - Yellow
+        darkGreyLineUpper,    // index 2 - Dark Grey
+        lightGreenLineUpper,  // index 3 - Light Green
+        darkGreenLineUpper    // index 4 - Dark Green
     ];
     
     // Add event listeners to each color slider
