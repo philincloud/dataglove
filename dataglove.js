@@ -23,8 +23,9 @@ let circle, circle2, circle3, yellowDisk, lightGreenDisk, darkGreenDisk, orangeD
 // Global variables for line objects
 let redLine, blueLine, greenLine, yellowLine, lightGreenLine, darkGreenLine, orangeLine, darkGreyLine;
 
-// Global variables for upper (rotatable) parts of line objects
-let orangeLineUpper, yellowLineUpper, darkGreyLineUpper, lightGreenLineUpper, darkGreenLineUpper;
+
+// Global variables for pivot points and upper (rotatable) parts of line objects
+let orangeLinePivot, orangeLineUpper, yellowLinePivot, yellowLineUpper, darkGreyLinePivot, darkGreyLineUpper, lightGreenLinePivot, lightGreenLineUpper, darkGreenLinePivot, darkGreenLineUpper;
 
 // Three.js scene setup
 function initThreeScene() {
@@ -78,6 +79,7 @@ function initThreeScene() {
     sceneGroup.add(circle3);
     
 
+
     // Create vertical line through dark grey disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
@@ -88,12 +90,18 @@ function initThreeScene() {
     darkGreyLine.position.set(0, -1.8, 0); // Position so top touches y=0
     sceneGroup.add(darkGreyLine);
     
+    // Create pivot point at y=0 (red x-axis line)
+    darkGreyLinePivot = new THREE.Group();
+    darkGreyLinePivot.position.set(0, 0, 0); // Position at red x-axis line
+    sceneGroup.add(darkGreyLinePivot);
+    
+
     // Upper part: rotatable from y=0 to y=3.6 (half of 7.2)
     const darkGreyLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3.6, 16);
     const darkGreyLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreyLineUpper = new THREE.Mesh(darkGreyLineUpperGeometry, darkGreyLineUpperMaterial);
-    darkGreyLineUpper.position.set(0, 1.8, 0); // Position so bottom touches y=0
-    sceneGroup.add(darkGreyLineUpper);
+    darkGreyLineUpper.position.set(0, 1.8, 0); // Position so bottom touches y=0 relative to pivot
+    darkGreyLinePivot.add(darkGreyLineUpper); // Add as child of pivot
 
 
     // Create red horizontal line across the disk (X-axis) - using CylinderGeometry for round appearance
@@ -177,6 +185,7 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through yellow disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
@@ -187,12 +196,18 @@ function initThreeScene() {
     yellowLine.position.set(-1, -1.5, 0); // Position so top touches y=0
     sceneGroup.add(yellowLine);
     
+    // Create pivot point at y=0 (red x-axis line)
+    yellowLinePivot = new THREE.Group();
+    yellowLinePivot.position.set(-1, 0, 0); // Position at red x-axis line
+    sceneGroup.add(yellowLinePivot);
+    
+
     // Upper part: rotatable from y=0 to y=3 (half of 6)
     const yellowLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
     const yellowLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     yellowLineUpper = new THREE.Mesh(yellowLineUpperGeometry, yellowLineUpperMaterial);
-    yellowLineUpper.position.set(-1, 1.5, 0); // Position so bottom touches y=0
-    sceneGroup.add(yellowLineUpper);
+    yellowLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
+    yellowLinePivot.add(yellowLineUpper); // Add as child of pivot
     
 
 
@@ -215,6 +230,7 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through light green disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
@@ -225,12 +241,18 @@ function initThreeScene() {
     lightGreenLine.position.set(1, -1.5, 0); // Position so top touches y=0
     sceneGroup.add(lightGreenLine);
     
+    // Create pivot point at y=0 (red x-axis line)
+    lightGreenLinePivot = new THREE.Group();
+    lightGreenLinePivot.position.set(1, 0, 0); // Position at red x-axis line
+    sceneGroup.add(lightGreenLinePivot);
+    
+
     // Upper part: rotatable from y=0 to y=3 (half of 6)
     const lightGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
     const lightGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     lightGreenLineUpper = new THREE.Mesh(lightGreenLineUpperGeometry, lightGreenLineUpperMaterial);
-    lightGreenLineUpper.position.set(1, 1.5, 0); // Position so bottom touches y=0
-    sceneGroup.add(lightGreenLineUpper);
+    lightGreenLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
+    lightGreenLinePivot.add(lightGreenLineUpper); // Add as child of pivot
     
 
 
@@ -253,6 +275,7 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through dark green disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
@@ -263,12 +286,18 @@ function initThreeScene() {
     darkGreenLine.position.set(2, -1.05, 0); // Position so top touches y=0
     sceneGroup.add(darkGreenLine);
     
+    // Create pivot point at y=0 (red x-axis line)
+    darkGreenLinePivot = new THREE.Group();
+    darkGreenLinePivot.position.set(2, 0, 0); // Position at red x-axis line
+    sceneGroup.add(darkGreenLinePivot);
+    
+
     // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
     const darkGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
     const darkGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreenLineUpper = new THREE.Mesh(darkGreenLineUpperGeometry, darkGreenLineUpperMaterial);
-    darkGreenLineUpper.position.set(2, 1.05, 0); // Position so bottom touches y=0
-    sceneGroup.add(darkGreenLineUpper);
+    darkGreenLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
+    darkGreenLinePivot.add(darkGreenLineUpper); // Add as child of pivot
     
 
     
@@ -293,6 +322,7 @@ function initThreeScene() {
 
 
 
+
     // Create vertical line through orange disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
@@ -303,12 +333,18 @@ function initThreeScene() {
     orangeLine.position.set(-2, -1.05, 0); // Position so top touches y=0
     sceneGroup.add(orangeLine);
     
+    // Create pivot point at y=0 (red x-axis line)
+    orangeLinePivot = new THREE.Group();
+    orangeLinePivot.position.set(-2, 0, 0); // Position at red x-axis line
+    sceneGroup.add(orangeLinePivot);
+    
+
     // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
     const orangeLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
     const orangeLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLineUpper = new THREE.Mesh(orangeLineUpperGeometry, orangeLineUpperMaterial);
-    orangeLineUpper.position.set(-2, 1.05, 0); // Position so bottom touches y=0
-    sceneGroup.add(orangeLineUpper);
+    orangeLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
+    orangeLinePivot.add(orangeLineUpper); // Add as child of pivot
     
     // Add lighting for better visibility
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
@@ -400,13 +436,14 @@ function setupColorCircleControls() {
     
 
 
-    // Line mapping: slider index → black line object (using upper rotatable parts)
+
+    // Line mapping: slider index → pivot points (for hinge rotation)
     const lines = [
-        orangeLineUpper,      // index 0 - Orange
-        yellowLineUpper,      // index 1 - Yellow
-        darkGreyLineUpper,    // index 2 - Dark Grey
-        lightGreenLineUpper,  // index 3 - Light Green
-        darkGreenLineUpper    // index 4 - Dark Green
+        orangeLinePivot,      // index 0 - Orange
+        yellowLinePivot,      // index 1 - Yellow
+        darkGreyLinePivot,    // index 2 - Dark Grey
+        lightGreenLinePivot,  // index 3 - Light Green
+        darkGreenLinePivot    // index 4 - Dark Green
     ];
     
     // Add event listeners to each color slider

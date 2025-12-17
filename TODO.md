@@ -1,45 +1,54 @@
 
+
 # Plan for Line Rotation Modification
 
 ## Objective
 Modify black lines so that only the part above the red x-axis line rotates, while the part below stays stationary (creating a hinge effect at the red point).
 
-## Implementation Status: ✅ COMPLETED
+## Implementation Status: ✅ COMPLETED AND CORRECTED
 
 ### Changes Made:
 
 #### 1. Updated Global Variables ✅
-- Added new global variables for the upper (rotatable) parts of each line
-- Variables: `orangeLineUpper`, `yellowLineUpper`, `darkGreyLineUpper`, `lightGreenLineUpper`, `darkGreenLineUpper`
+- Added global variables for pivot points and upper (rotatable) parts of each line
+- Variables: `orangeLinePivot`, `orangeLineUpper`, `yellowLinePivot`, `yellowLineUpper`, `darkGreyLinePivot`, `darkGreyLineUpper`, `lightGreenLinePivot`, `lightGreenLineUpper`, `darkGreenLinePivot`, `darkGreenLineUpper`
 
 #### 2. Modified Line Creation ✅
 For each black line:
 - **Lower part**: Created fixed cylinder from y=0 down to the negative end
-- **Upper part**: Created rotatable cylinder from y=0 up to the positive end
-- Positioned the hinge point at y=0 (red x-axis line)
+- **Pivot point**: Created a THREE.Group positioned at the red x-axis line (y=0) for proper hinge rotation
+- **Upper part**: Created rotatable cylinder positioned relative to pivot, extending from y=0 to positive end
+- Positioned the hinge point at the correct red x-axis line coordinates
 - Adjusted positioning for each line:
-  - Dark Grey: Lower part from y=0 to y=-3.6, Upper part from y=0 to y=3.6
-  - Yellow: Lower part from y=0 to y=-3, Upper part from y=0 to y=3
-  - Light Green: Lower part from y=0 to y=-3, Upper part from y=0 to y=3
-  - Dark Green: Lower part from y=0 to y=-2.1, Upper part from y=0 to y=2.1
-  - Orange: Lower part from y=0 to y=-2.1, Upper part from y=0 to y=2.1
+  - Dark Grey: Pivot at (0,0,0), Lower part y=-1.8, Upper part y=1.8
+  - Yellow: Pivot at (-1,0,0), Lower part y=-1.5, Upper part y=1.5
+  - Light Green: Pivot at (1,0,0), Lower part y=-1.5, Upper part y=1.5
+  - Dark Green: Pivot at (2,0,0), Lower part y=-1.05, Upper part y=1.05
+  - Orange: Pivot at (-2,0,0), Lower part y=-1.05, Upper part y=1.05
 
 #### 3. Updated Rotation Function ✅
-- Modified rotation function to only rotate the upper part of each line
-- Lower parts remain stationary
+- Rotation function now rotates the pivot points instead of the upper line parts directly
+- This ensures proper hinge-like rotation around the red x-axis line
+- Lower parts remain stationary as they are not children of the pivots
 
 #### 4. Updated Slider Controls ✅
-- Updated the lines array in `setupColorCircleControls` to reference the upper (rotatable) parts
-- Maintained proper mapping between sliders and rotatable line segments
+- Updated the lines array in `setupColorCircleControls` to reference the pivot points
+- Maintained proper mapping between sliders and pivot points for correct rotation
 
-### 5. Test Implementation ✅
-- Implementation complete and ready for testing
-- Each black line now has a stationary lower portion and a rotatable upper portion
-- Hinge effect created at the red x-axis line (y=0)
+### 5. Bug Fix: Positioning Correction ✅
+- **Issue**: Upper parts were positioned with global coordinates instead of relative to pivot
+- **Solution**: Changed all upper line positioning to be relative to their pivot groups (x=0, y=position)
+- **Result**: Upper parts now correctly center on their respective red x-axis points
+
+### 6. Test Implementation ✅
+- Implementation complete and corrected
+- Each black line has a stationary lower portion and a rotatable upper portion
+- Hinge effect properly created at the red x-axis line (y=0)
+- Upper parts correctly positioned relative to pivot points
 
 ## Files Modified
-- `dataglove.js` - Main implementation file (completed)
+- `dataglove.js` - Main implementation file (completed and corrected)
 
 ## Result
-Each black line now has a stationary lower portion and a rotatable upper portion, creating the desired hinge-like effect at the red x-axis line.
+Each black line now has a stationary lower portion and a rotatable upper portion, creating the desired hinge-like effect at the correct red x-axis line positions. The implementation uses pivot groups for proper rotational behavior around the hinge points.
 
