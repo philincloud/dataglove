@@ -30,10 +30,11 @@ function initThreeScene() {
     
     camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     
-    // Create white circle
-    const circleGeometry = new THREE.CircleGeometry(2, 32);
-    const circleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    circle = new THREE.Mesh(circleGeometry, circleMaterial);
+
+    // Create white disk with 1px thickness
+    const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32); // radius 2, height 0.01 (1px)
+    const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    circle = new THREE.Mesh(diskGeometry, diskMaterial);
     scene.add(circle);
     
     // Create red point in center
