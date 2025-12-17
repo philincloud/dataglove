@@ -64,32 +64,42 @@ function setupControls() {
     const yValue = ySlider.nextElementSibling;
     const zValue = zSlider.nextElementSibling;
     
-    // Update positions when sliders change
-    function updatePositions() {
-        const x = parseFloat(xSlider.value);
-        const y = parseFloat(ySlider.value);
-        const z = parseFloat(zSlider.value);
+
+    // Update rotation when sliders change
+    function updateRotation() {
+        const pitch = parseFloat(xSlider.value);
+        const yaw = parseFloat(ySlider.value);
+        const roll = parseFloat(zSlider.value);
         
-        // Move both objects together
-        circle.position.set(x, y, z);
-        redPoint.position.set(x, y, z);
+        // Rotate both objects together
+        circle.rotation.set(
+            THREE.MathUtils.degToRad(pitch), // X-axis (pitch)
+            THREE.MathUtils.degToRad(yaw),   // Y-axis (yaw)
+            THREE.MathUtils.degToRad(roll)   // Z-axis (roll)
+        );
+        redPoint.rotation.set(
+            THREE.MathUtils.degToRad(pitch),
+            THREE.MathUtils.degToRad(yaw),
+            THREE.MathUtils.degToRad(roll)
+        );
         
         // Update display values
-        xValue.textContent = x;
-        yValue.textContent = y;
-        zValue.textContent = z;
+        xValue.textContent = pitch + '°';
+        yValue.textContent = yaw + '°';
+        zValue.textContent = roll + '°';
         
         // Re-render scene
         renderer.render(scene, camera);
     }
     
+
     // Add event listeners to all sliders
-    xSlider.addEventListener('input', updatePositions);
-    ySlider.addEventListener('input', updatePositions);
-    zSlider.addEventListener('input', updatePositions);
+    xSlider.addEventListener('input', updateRotation);
+    ySlider.addEventListener('input', updateRotation);
+    zSlider.addEventListener('input', updateRotation);
     
-    // Initialize positions
-    updatePositions();
+    // Initialize rotation
+    updateRotation();
 }
 
 // Initialize when page loads
