@@ -13,11 +13,49 @@
             background-color: #f0f0f0;
         }
 
+
         #canvas-container {
             width: 75vw;
             height: 75vh;
             border: 1px solid #ccc;
             margin: 20px auto;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .slider-container label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .slider-container input[type="range"] {
+            width: 150px;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+        
+        .slider-container .value {
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
@@ -25,8 +63,26 @@
     <h1>DataGlove with Three.js</h1>
     <p>3D scene using Three.js library.</p>
     
+
     <div id="canvas-container"></div>
     
+    <div class="controls">
+        <div class="slider-container">
+            <label for="x-axis">X-Axis</label>
+            <input type="range" id="x-axis" min="-10" max="10" value="0" step="0.1">
+            <div class="value">0</div>
+        </div>
+        <div class="slider-container">
+            <label for="y-axis">Y-Axis</label>
+            <input type="range" id="y-axis" min="-10" max="10" value="0" step="0.1">
+            <div class="value">0</div>
+        </div>
+        <div class="slider-container">
+            <label for="z-axis">Z-Axis</label>
+            <input type="range" id="z-axis" min="-10" max="10" value="0" step="0.1">
+            <div class="value">0</div>
+        </div>
+    </div>
 
     <!-- Three.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
