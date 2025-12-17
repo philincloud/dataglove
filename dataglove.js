@@ -1,3 +1,4 @@
+
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -43,6 +44,9 @@ function initThreeScene() {
     sceneGroup = new THREE.Group();
     scene.add(sceneGroup);
 
+
+
+
     // Create white disk with minimal thickness (X,Y surface)
     const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32);
     const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -50,13 +54,15 @@ function initThreeScene() {
     sceneGroup.add(circle);
     
 
+
     // Create light grey disk in Y,Z surface (perpendicular to X-axis)
     const disk2Geometry = new THREE.CylinderGeometry(2, 2, 0.01, 32);
     const disk2Material = new THREE.MeshBasicMaterial({ color: 0xcccccc });
-    const circle2 = new THREE.Mesh(disk2Geometry, disk2Material);
+    circle2 = new THREE.Mesh(disk2Geometry, disk2Material);
     circle2.rotation.x = Math.PI / 2; // Rotate to align with Y,Z surface
     sceneGroup.add(circle2);
     
+
 
 
 
@@ -65,6 +71,7 @@ function initThreeScene() {
     const disk3Material = new THREE.MeshBasicMaterial({ color: 0x999999 });
     circle3 = new THREE.Mesh(disk3Geometry, disk3Material);
     circle3.rotation.z = Math.PI / 2; // Rotate to align with X,Z surface
+    circle3.userData.originalColor = new THREE.Color(0x999999);
     sceneGroup.add(circle3);
     
     // Create vertical line through dark grey disk center (along y-axis)
@@ -136,13 +143,17 @@ function initThreeScene() {
 
 
 
+
+
+
     // Create yellow disk centered on the red point at 1/4 of red axis (x = -1)
     // Surface parallel to y/z plane
-    const yellowDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.02, 32);
+    const yellowDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.01, 32);
     const yellowDiskMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-    const yellowDisk = new THREE.Mesh(yellowDiskGeometry, yellowDiskMaterial);
+    yellowDisk = new THREE.Mesh(yellowDiskGeometry, yellowDiskMaterial);
     yellowDisk.position.set(-1, 0, 0); // Center on the 1/4 point of red axis
     yellowDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
+    yellowDisk.userData.originalColor = new THREE.Color(0xffff00);
     sceneGroup.add(yellowDisk);
     
 
@@ -159,13 +170,17 @@ function initThreeScene() {
     sceneGroup.add(yellowLine);
     
 
+
+
+
     // Create light green disk centered on the red point at 3/4 of red axis (x = 1)
     // Surface parallel to y/z plane
-    const lightGreenDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.02, 32);
+    const lightGreenDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.01, 32);
     const lightGreenDiskMaterial = new THREE.MeshBasicMaterial({ color: 0x90ee90 });
-    const lightGreenDisk = new THREE.Mesh(lightGreenDiskGeometry, lightGreenDiskMaterial);
+    lightGreenDisk = new THREE.Mesh(lightGreenDiskGeometry, lightGreenDiskMaterial);
     lightGreenDisk.position.set(1, 0, 0); // Center on the 3/4 point of red axis
     lightGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
+    lightGreenDisk.userData.originalColor = new THREE.Color(0x90ee90);
     sceneGroup.add(lightGreenDisk);
     
 
@@ -182,13 +197,17 @@ function initThreeScene() {
     sceneGroup.add(lightGreenLine);
     
 
+
+
+
     // Create dark green disk at the end of red x-axis line (x = 2)
     // Surface parallel to y/z plane
-    const darkGreenDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.02, 32);
+    const darkGreenDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.01, 32);
     const darkGreenDiskMaterial = new THREE.MeshBasicMaterial({ color: 0x006400 });
-    const darkGreenDisk = new THREE.Mesh(darkGreenDiskGeometry, darkGreenDiskMaterial);
+    darkGreenDisk = new THREE.Mesh(darkGreenDiskGeometry, darkGreenDiskMaterial);
     darkGreenDisk.position.set(2, 0, 0); // Center on the end point of red axis
     darkGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
+    darkGreenDisk.userData.originalColor = new THREE.Color(0x006400);
     sceneGroup.add(darkGreenDisk);
     
 
@@ -205,30 +224,19 @@ function initThreeScene() {
     sceneGroup.add(darkGreenLine);
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
 
     // Create orange disk at the beginning of red x-axis line (x = -2)
     // Surface parallel to y/z plane, same size as dark green disk (radius 2.1)
-    const orangeDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.02, 32);
+    const orangeDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.01, 32);
     const orangeDiskMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
-    const orangeDisk = new THREE.Mesh(orangeDiskGeometry, orangeDiskMaterial);
+    orangeDisk = new THREE.Mesh(orangeDiskGeometry, orangeDiskMaterial);
     orangeDisk.position.set(-2, 0, 0); // Center on the beginning point of red axis
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
+    orangeDisk.userData.originalColor = new THREE.Color(0xffa500);
     sceneGroup.add(orangeDisk);
     
 
@@ -362,6 +370,7 @@ function setupColorCircleControls() {
 }
 
 
+
 // Setup checkbox visibility controls
 function setupCheckboxControls() {
     // Get all checkboxes
@@ -378,17 +387,26 @@ function setupCheckboxControls() {
     ];
     
     console.log('Available disks:', disks.length);
+    console.log('Disk objects:', {
+        orangeDisk: orangeDisk,
+        yellowDisk: yellowDisk,
+        circle3: circle3,
+        lightGreenDisk: lightGreenDisk,
+        darkGreenDisk: darkGreenDisk
+    });
     
     // Add event listeners to each checkbox
     checkboxes.forEach((checkbox, index) => {
         console.log(`Setting up checkbox ${index}:`, checkbox.id);
         
         checkbox.addEventListener('change', function() {
-            console.log(`Checkbox ${index} (${checkbox.id}) changed to:`, this.checked);
+            console.log(`\n=== Checkbox ${index} (${checkbox.id}) changed to: ${this.checked} ===`);
             
             // Toggle disk visibility based on checkbox state
             if (disks[index]) {
                 console.log(`Toggling disk ${index}:`, disks[index]);
+                console.log(`Disk position:`, disks[index].position);
+                console.log(`Disk material type:`, disks[index].material.constructor.name);
                 toggleDiskVisibility(disks[index], this.checked);
             } else {
                 console.log(`No disk found for index ${index}`);
@@ -400,17 +418,35 @@ function setupCheckboxControls() {
     });
 }
 
+
+
+
+
+
+
+
+
 // Function to toggle disk visibility
 function toggleDiskVisibility(disk, isVisible) {
+    console.log(`Toggling disk visibility - Visible: ${isVisible}`);
+    console.log(`Disk object:`, disk);
+    
     if (isVisible) {
-        // Make disk visible (opaque)
+        // Make disk opaque and visible
         disk.material.transparent = false;
         disk.material.opacity = 1.0;
+        disk.visible = true;
+        console.log(`Disk made visible - opacity: ${disk.material.opacity}, transparent: ${disk.material.transparent}`);
     } else {
         // Make disk transparent
         disk.material.transparent = true;
-        disk.material.opacity = 0.1; // Almost invisible but still clickable
+        disk.material.opacity = 0.0;
+        disk.visible = false;
+        console.log(`Disk made invisible - opacity: ${disk.material.opacity}, transparent: ${disk.material.transparent}`);
     }
+    
+    // Force material update
+    disk.material.needsUpdate = true;
     
     // Re-render scene
     renderer.render(scene, camera);
