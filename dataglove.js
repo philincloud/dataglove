@@ -317,9 +317,14 @@ function setupControls() {
     // Initialize rotation
     updateRotation();
     
+
     // Setup color circle rotation controls
     setupColorCircleControls();
+    
+    // Setup checkbox visibility controls
+    setupCheckboxControls();
 }
+
 
 
 // Setup color circle rotation controls
@@ -354,6 +359,47 @@ function setupColorCircleControls() {
             valueDisplay.textContent = degrees + '°';
         });
     });
+}
+
+// Setup checkbox visibility controls
+function setupCheckboxControls() {
+    // Get all checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    // Disk mapping: checkbox index → disk object
+    const disks = [
+        orangeDisk,      // index 0 - Orange
+        yellowDisk,      // index 1 - Yellow
+        circle3,         // index 2 - Dark Grey (using circle3 as it's the dark grey disk)
+        lightGreenDisk,  // index 3 - Light Green
+        darkGreenDisk    // index 4 - Dark Green
+    ];
+    
+    // Add event listeners to each checkbox
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', function() {
+            // Toggle disk visibility based on checkbox state
+            if (disks[index]) {
+                toggleDiskVisibility(disks[index], this.checked);
+            }
+        });
+    });
+}
+
+// Function to toggle disk visibility
+function toggleDiskVisibility(disk, isVisible) {
+    if (isVisible) {
+        // Make disk visible (opaque)
+        disk.material.transparent = false;
+        disk.material.opacity = 1.0;
+    } else {
+        // Make disk transparent
+        disk.material.transparent = true;
+        disk.material.opacity = 0.1; // Almost invisible but still clickable
+    }
+    
+    // Re-render scene
+    renderer.render(scene, camera);
 }
 
 // Initialize when page loads
