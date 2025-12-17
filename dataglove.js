@@ -1,4 +1,3 @@
-
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -417,14 +416,6 @@ function setupCheckboxControls() {
         checkbox.checked = true;
     });
 }
-
-
-
-
-
-
-
-
 
 // Function to toggle disk visibility
 function toggleDiskVisibility(disk, isVisible) {
