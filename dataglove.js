@@ -38,35 +38,26 @@ function initThreeScene() {
     
 
 
-    // Create red horizontal line across the disk (X-axis)
-    const redLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(-2, 0, 0.02),
-        new THREE.Vector3(2, 0, 0.02)
-    ]);
 
-    const redLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000, linewidth: 5 });
-    redLine = new THREE.Line(redLineGeometry, redLineMaterial);
+    // Create red horizontal line across the disk (X-axis) - using BoxGeometry for actual thickness
+    const redLineGeometry = new THREE.BoxGeometry(4, 0.15, 0.15);
+    const redLineMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    redLine = new THREE.Mesh(redLineGeometry, redLineMaterial);
     scene.add(redLine);
     
 
-    // Create blue vertical line across the disk (Y-axis)
-    const blueLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, -2, 0.02),
-        new THREE.Vector3(0, 2, 0.02)
-    ]);
 
-    const blueLineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 5 });
-    blueLine = new THREE.Line(blueLineGeometry, blueLineMaterial);
+    // Create blue vertical line across the disk (Y-axis) - using BoxGeometry for actual thickness
+    const blueLineGeometry = new THREE.BoxGeometry(0.15, 4, 0.15);
+    const blueLineMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    blueLine = new THREE.Mesh(blueLineGeometry, blueLineMaterial);
     scene.add(blueLine);
     
-    // Create green Z-axis line perpendicular to the disk
-    const greenLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, -3),
-        new THREE.Vector3(0, 0, 3)
-    ]);
 
-    const greenLineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 5 });
-    greenLine = new THREE.Line(greenLineGeometry, greenLineMaterial);
+    // Create green Z-axis line perpendicular to the disk - using BoxGeometry for actual thickness
+    const greenLineGeometry = new THREE.BoxGeometry(0.15, 0.15, 6);
+    const greenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    greenLine = new THREE.Mesh(greenLineGeometry, greenLineMaterial);
     scene.add(greenLine);
     
     // Create red point in center
