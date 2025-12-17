@@ -11,6 +11,9 @@ function datagloveProcess(data) {
     return data;
 }
 
+
+
+
 // Global variables for scene objects
 let scene, camera, renderer, circle, redPoint;
 
@@ -31,11 +34,30 @@ function initThreeScene() {
     camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     
 
+
     // Create white disk with 1px thickness
     const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32); // radius 2, height 0.01 (1px)
     const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     circle = new THREE.Mesh(diskGeometry, diskMaterial);
     scene.add(circle);
+    
+    // Create red horizontal line across the disk
+    const redLineGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2, 0, 0.006),  // Start at left edge
+        new THREE.Vector3(2, 0, 0.006)    // End at right edge
+    ]);
+    const redLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    const redLine = new THREE.Line(redLineGeometry, redLineMaterial);
+    scene.add(redLine);
+    
+    // Create blue vertical line across the disk
+    const blueLineGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, -2, 0.006),  // Start at bottom edge
+        new THREE.Vector3(0, 2, 0.006)    // End at top edge
+    ]);
+    const blueLineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    const blueLine = new THREE.Line(blueLineGeometry, blueLineMaterial);
+    scene.add(blueLine);
     
     // Create red point in center
     const pointGeometry = new THREE.SphereGeometry(0.1, 8, 8);
@@ -72,13 +94,24 @@ function setupControls() {
         const yaw = parseFloat(ySlider.value);
         const roll = parseFloat(zSlider.value);
         
-        // Rotate both objects together
+
+        // Rotate all objects together
         circle.rotation.set(
             THREE.MathUtils.degToRad(pitch), // X-axis (pitch)
             THREE.MathUtils.degToRad(yaw),   // Y-axis (yaw)
             THREE.MathUtils.degToRad(roll)   // Z-axis (roll)
         );
         redPoint.rotation.set(
+            THREE.MathUtils.degToRad(pitch),
+            THREE.MathUtils.degToRad(yaw),
+            THREE.MathUtils.degToRad(roll)
+        );
+        redLine.rotation.set(
+            THREE.MathUtils.degToRad(pitch),
+            THREE.MathUtils.degToRad(yaw),
+            THREE.MathUtils.degToRad(roll)
+        );
+        blueLine.rotation.set(
             THREE.MathUtils.degToRad(pitch),
             THREE.MathUtils.degToRad(yaw),
             THREE.MathUtils.degToRad(roll)
