@@ -6,31 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataGlove with Three.js</title>
     <style>
+
         body {
             margin: 0;
             padding: 20px;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            display: flex;
+            gap: 20px;
         }
 
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
         #canvas-container {
             width: 75vw;
             height: 75vh;
             border: 1px solid #ccc;
-            margin: 20px auto;
         }
         
         .controls {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin: 20px auto;
-            max-width: 600px;
             padding: 20px;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+
+        .color-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 140px;
+        }
+
+        .color-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-button {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .color-slider {
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider-value {
+            font-size: 11px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .orange-btn {
+            background-color: #ffa500;
+        }
+
+        .yellow-btn {
+            background-color: #ffff00;
+            color: black;
+            text-shadow: none;
+        }
+
+        .dark-grey-btn {
+            background-color: #999999;
+        }
+
+        .light-green-btn {
+            background-color: #90ee90;
+            color: black;
+            text-shadow: none;
+        }
+
+        .dark-green-btn {
+            background-color: #006400;
         }
         
         .slider-container {
@@ -59,30 +133,61 @@
         }
     </style>
 </head>
+
 <body>
-    <h1>DataGlove with Three.js</h1>
-    <p>3D scene using Three.js library.</p>
-    
+    <div class="left-panel">
+        <h1>DataGlove with Three.js</h1>
+        <p>3D scene using Three.js library.</p>
+        
 
-    <div id="canvas-container"></div>
-    
-    <div class="controls">
-
-
-        <div class="slider-container">
-            <label for="x-axis">Pitch (X)</label>
-            <input type="range" id="x-axis" min="0" max="360" value="0" step="1">
-            <div class="value">0°</div>
+        <div class="color-buttons">
+            <div class="color-control">
+                <button class="color-button orange-btn">Orange</button>
+                <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
+                <div class="slider-value">90°</div>
+            </div>
+            <div class="color-control">
+                <button class="color-button yellow-btn">Yellow</button>
+                <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
+                <div class="slider-value">90°</div>
+            </div>
+            <div class="color-control">
+                <button class="color-button dark-grey-btn">Dark Grey</button>
+                <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
+                <div class="slider-value">90°</div>
+            </div>
+            <div class="color-control">
+                <button class="color-button light-green-btn">Light Green</button>
+                <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
+                <div class="slider-value">90°</div>
+            </div>
+            <div class="color-control">
+                <button class="color-button dark-green-btn">Dark Green</button>
+                <input type="range" class="color-slider" min="1" max="180" value="90" step="1">
+                <div class="slider-value">90°</div>
+            </div>
         </div>
-        <div class="slider-container">
-            <label for="y-axis">Yaw (Y)</label>
-            <input type="range" id="y-axis" min="0" max="360" value="0" step="1">
-            <div class="value">0°</div>
-        </div>
-        <div class="slider-container">
-            <label for="z-axis">Roll (Z)</label>
-            <input type="range" id="z-axis" min="0" max="360" value="0" step="1">
-            <div class="value">0°</div>
+    </div>
+
+    <div>
+        <div id="canvas-container"></div>
+        
+        <div class="controls">
+            <div class="slider-container">
+                <label for="x-axis">Pitch (X)</label>
+                <input type="range" id="x-axis" min="0" max="360" value="0" step="1">
+                <div class="value">0°</div>
+            </div>
+            <div class="slider-container">
+                <label for="y-axis">Yaw (Y)</label>
+                <input type="range" id="y-axis" min="0" max="360" value="0" step="1">
+                <div class="value">0°</div>
+            </div>
+            <div class="slider-container">
+                <label for="z-axis">Roll (Z)</label>
+                <input type="range" id="z-axis" min="0" max="360" value="0" step="1">
+                <div class="value">0°</div>
+            </div>
         </div>
     </div>
 

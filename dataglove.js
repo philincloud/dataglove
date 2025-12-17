@@ -10,8 +10,17 @@ function datagloveProcess(data) {
 }
 
 
+
+
 // Global variables for scene objects
 let scene, camera, renderer, sceneGroup; // Group to hold all rotatable objects
+
+// Global variables for circle objects
+let circle, circle2, circle3, yellowDisk, lightGreenDisk, darkGreenDisk, orangeDisk;
+
+
+// Global variables for line objects
+let redLine, blueLine, greenLine, yellowLine, lightGreenLine, darkGreenLine, orangeLine, darkGreyLine;
 
 // Three.js scene setup
 function initThreeScene() {
@@ -50,12 +59,21 @@ function initThreeScene() {
     
 
 
+
     // Create dark grey disk in X,Z surface (perpendicular to Y-axis)
     const disk3Geometry = new THREE.CylinderGeometry(3.6, 3.6, 0.01, 32);
     const disk3Material = new THREE.MeshBasicMaterial({ color: 0x999999 });
-    const circle3 = new THREE.Mesh(disk3Geometry, disk3Material);
+    circle3 = new THREE.Mesh(disk3Geometry, disk3Material);
     circle3.rotation.z = Math.PI / 2; // Rotate to align with X,Z surface
     sceneGroup.add(circle3);
+    
+    // Create vertical line through dark grey disk center (along y-axis)
+    const darkGreyLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 7.2, 16);
+    const darkGreyLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    darkGreyLine = new THREE.Mesh(darkGreyLineGeometry, darkGreyLineMaterial);
+    darkGreyLine.position.set(0, 0, 0); // Center on dark grey disk
+    sceneGroup.add(darkGreyLine);
+
 
     // Create red horizontal line across the disk (X-axis) - using CylinderGeometry for round appearance
     const redLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 4, 16);
@@ -65,6 +83,7 @@ function initThreeScene() {
     sceneGroup.add(redLine);
     
 
+
     // Create blue vertical line across the disk (Y-axis) - using CylinderGeometry for round appearance
     const blueLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 4, 16);
     const blueLineMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -72,6 +91,7 @@ function initThreeScene() {
     // No rotation needed - cylinder by default aligns with Y-axis
     sceneGroup.add(blueLine);
     
+
 
     // Create green Z-axis line perpendicular to the disk - using CylinderGeometry for round appearance
     const greenLineGeometry = new THREE.CylinderGeometry(0.03, 0.03, 6, 16);
@@ -125,10 +145,16 @@ function initThreeScene() {
     yellowDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(yellowDisk);
     
+
+
+
+
+
+
     // Create vertical line through yellow disk center (along y-axis)
-    const yellowLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 6, 16);
+    const yellowLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 6, 16);
     const yellowLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const yellowLine = new THREE.Mesh(yellowLineGeometry, yellowLineMaterial);
+    yellowLine = new THREE.Mesh(yellowLineGeometry, yellowLineMaterial);
     yellowLine.position.set(-1, 0, 0); // Center on yellow disk
     sceneGroup.add(yellowLine);
     
@@ -142,10 +168,16 @@ function initThreeScene() {
     lightGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(lightGreenDisk);
     
+
+
+
+
+
+
     // Create vertical line through light green disk center (along y-axis)
-    const lightGreenLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 6, 16);
+    const lightGreenLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 6, 16);
     const lightGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const lightGreenLine = new THREE.Mesh(lightGreenLineGeometry, lightGreenLineMaterial);
+    lightGreenLine = new THREE.Mesh(lightGreenLineGeometry, lightGreenLineMaterial);
     lightGreenLine.position.set(1, 0, 0); // Center on light green disk
     sceneGroup.add(lightGreenLine);
     
@@ -159,10 +191,16 @@ function initThreeScene() {
     darkGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(darkGreenDisk);
     
+
+
+
+
+
+
     // Create vertical line through dark green disk center (along y-axis)
-    const darkGreenLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 4.2, 16);
+    const darkGreenLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 4.2, 16);
     const darkGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const darkGreenLine = new THREE.Mesh(darkGreenLineGeometry, darkGreenLineMaterial);
+    darkGreenLine = new THREE.Mesh(darkGreenLineGeometry, darkGreenLineMaterial);
     darkGreenLine.position.set(2, 0, 0); // Center on dark green disk
     sceneGroup.add(darkGreenLine);
     
@@ -193,10 +231,16 @@ function initThreeScene() {
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     sceneGroup.add(orangeDisk);
     
+
+
+
+
+
+
     // Create vertical line through orange disk center (along y-axis)
-    const orangeLineGeometry = new THREE.CylinderGeometry(0.02, 0.02, 4.2, 16);
+    const orangeLineGeometry = new THREE.CylinderGeometry(0.04, 0.04, 4.2, 16);
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const orangeLine = new THREE.Mesh(orangeLineGeometry, orangeLineMaterial);
+    orangeLine = new THREE.Mesh(orangeLineGeometry, orangeLineMaterial);
     orangeLine.position.set(-2, 0, 0); // Center on orange disk
     sceneGroup.add(orangeLine);
     
@@ -220,6 +264,17 @@ function initThreeScene() {
     setupControls();
     
     console.log('Three.js scene initialized');
+}
+
+
+
+// Function to rotate a black line around X-axis
+function rotateLineX(line, degrees) {
+    // Convert degrees to radians and rotate around X-axis
+    line.rotation.x = THREE.MathUtils.degToRad(degrees);
+    
+    // Re-render scene
+    renderer.render(scene, camera);
 }
 
 // Setup slider controls
@@ -261,6 +316,44 @@ function setupControls() {
     
     // Initialize rotation
     updateRotation();
+    
+    // Setup color circle rotation controls
+    setupColorCircleControls();
+}
+
+
+// Setup color circle rotation controls
+function setupColorCircleControls() {
+    // Get all color sliders
+    const colorSliders = document.querySelectorAll('.color-slider');
+    
+
+    // Line mapping: slider index → black line object
+    const lines = [
+        orangeLine,      // index 0 - Orange
+        yellowLine,      // index 1 - Yellow
+        darkGreyLine,    // index 2 - Dark Grey
+        lightGreenLine,  // index 3 - Light Green
+        darkGreenLine    // index 4 - Dark Green
+    ];
+    
+    // Add event listeners to each color slider
+    colorSliders.forEach((slider, index) => {
+        const valueDisplay = slider.nextElementSibling;
+        
+        // Update line rotation when slider changes
+        slider.addEventListener('input', function() {
+            const degrees = parseFloat(this.value);
+            
+            // Rotate the corresponding black line
+            if (lines[index]) {
+                rotateLineX(lines[index], degrees);
+            }
+            
+            // Update display value
+            valueDisplay.textContent = degrees + '°';
+        });
+    });
 }
 
 // Initialize when page loads
