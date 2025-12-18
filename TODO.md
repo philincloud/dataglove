@@ -67,6 +67,31 @@ For each black line:
 - Update `darkGreenLineLowerGeometry` height from `2.1` to `3.6`.
 - Update `darkGreenLine.position.set` Y-coordinate from `-1.25` to `-2.0`.
 
+
+
+### 10. Shift Dark Green Assembly ✅
+- Shift the dark green disk, red point, pivot, and bottom line down by 0.5 units along the Y-axis.
+- Update `redPoint4` position Y from `0` to `-0.5`.
+- Update `darkGreenDisk` position Y from `0` to `-0.5`.
+- Update `darkGreenLine` position Y from `-2.0` to `-2.5`.
+- Update `darkGreenLinePivot` position Y from `0` to `-0.5`.
+
+
+
+### 11. Trim Dark Green Bottom Line ✅
+- Trim the dark green bottom line so it ends at the same absolute height (Y = -3.8) as the other bottom lines.
+- Update `darkGreenLineLowerGeometry` height from `3.6` to `3.1`.
+- Update `darkGreenLine` position Y from `-2.5` to `-2.25`.
+
+
+
+### 12. Articulate Upper Orange Line ✅
+- Split the upper orange line into two parts with a new pivot joint.
+- **Middle Part:** Length 1.2, starts 0.2 units above the first pivot.
+- **New Pivot:** Located 0.2 units above the Middle Part (total 1.6 units from first pivot).
+- **Top Part:** Length 0.9, starts 0.2 units above the new pivot.
+- **Structure:** `orangeLinePivot` -> `orangeLineMiddle` + `orangeLineTopPivot` -> `orangeLineTop`.
+
 ## Files Modified
 - `dataglove.js` - Main implementation file (completed and corrected)
 
