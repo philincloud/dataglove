@@ -258,6 +258,7 @@ t
     <div>
         <div id="canvas-container"></div>
         
+
         <div class="controls">
             <div class="slider-container">
                 <label for="x-axis">Pitch (X)</label>
@@ -273,6 +274,17 @@ t
                 <label for="z-axis">Roll (Z)</label>
                 <input type="range" id="z-axis" min="0" max="360" value="0" step="1">
                 <div class="value">0°</div>
+            </div>
+
+            <div class="slider-container">
+                <label for="zoom-axis">Zoom</label>
+                <input type="range" id="zoom-axis" min="2" max="20" value="6" step="0.1">
+                <div class="value">6.0</div>
+            </div>
+            <div class="slider-container">
+                <label for="tilt-axis">Tilt</label>
+                <input type="range" id="tilt-axis" min="-5" max="5" value="2" step="0.1">
+                <div class="value">2.0</div>
             </div>
         </div>
     </div>

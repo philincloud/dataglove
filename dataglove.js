@@ -111,7 +111,8 @@ function initThreeScene() {
     const darkGreyLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3.6, 16);
     const darkGreyLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreyLineUpper = new THREE.Mesh(darkGreyLineUpperGeometry, darkGreyLineUpperMaterial);
-    darkGreyLineUpper.position.set(0, 1.8, 0); // Position so bottom touches y=0 relative to pivot
+
+    darkGreyLineUpper.position.set(0, 2.0, 0); // Position so bottom touches y=0 relative to pivot, 0.2 units higher
     darkGreyLinePivot.add(darkGreyLineUpper); // Add as child of pivot
 
 
@@ -154,7 +155,8 @@ function initThreeScene() {
     
     // Point at the beginning of the line (x = -2)
     const redPoint1 = new THREE.Mesh(axisPointGeometry, axisPointMaterial);
-    redPoint1.position.set(-2, 0, 0);
+
+    redPoint1.position.set(-2, -1, 0); // Red point for orange disk, shifted down by 1
     sceneGroup.add(redPoint1);
     
     // Point at 1/4 of the line length (x = -1)
@@ -223,7 +225,8 @@ function initThreeScene() {
     const yellowLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const yellowLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     yellowLineUpper = new THREE.Mesh(yellowLineUpperGeometry, yellowLineUpperMaterial);
-    yellowLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
+
+    yellowLineUpper.position.set(0, 1.7, 0); // Position so bottom touches y=0 relative to pivot, 0.2 units higher
     yellowLinePivot.add(yellowLineUpper); // Add as child of pivot
     
 
@@ -274,7 +277,8 @@ function initThreeScene() {
     const lightGreenLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const lightGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     lightGreenLineUpper = new THREE.Mesh(lightGreenLineUpperGeometry, lightGreenLineUpperMaterial);
-    lightGreenLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
+
+    lightGreenLineUpper.position.set(0, 1.7, 0); // Position so bottom touches y=0 relative to pivot, 0.2 units higher
     lightGreenLinePivot.add(lightGreenLineUpper); // Add as child of pivot
     
 
@@ -325,7 +329,8 @@ function initThreeScene() {
     const darkGreenLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const darkGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreenLineUpper = new THREE.Mesh(darkGreenLineUpperGeometry, darkGreenLineUpperMaterial);
-    darkGreenLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
+
+    darkGreenLineUpper.position.set(0, 1.25, 0); // Position so bottom touches y=0 relative to pivot, 0.2 units higher
     darkGreenLinePivot.add(darkGreenLineUpper); // Add as child of pivot
     
 
@@ -340,7 +345,8 @@ function initThreeScene() {
     const orangeDiskGeometry = new THREE.CylinderGeometry(2.1, 2.1, 0.01, 32);
     const orangeDiskMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
     orangeDisk = new THREE.Mesh(orangeDiskGeometry, orangeDiskMaterial);
-    orangeDisk.position.set(-2, 0, 0); // Center on the beginning point of red axis
+
+    orangeDisk.position.set(-2, -1, 0); // Center on the beginning point of red axis, shifted down by 1
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     orangeDisk.userData.originalColor = new THREE.Color(0xffa500);
     orangeDisk.visible = false; // Hidden by default
@@ -363,12 +369,14 @@ function initThreeScene() {
     const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
-    orangeLine.position.set(-2, -1.05, 0); // Position so top touches y=0
+
+    orangeLine.position.set(-2, -2.05, 0); // Position so top touches y=-1 (shifted down by 1)
     sceneGroup.add(orangeLine);
     
     // Create pivot point at y=0 (red x-axis line)
     orangeLinePivot = new THREE.Group();
-    orangeLinePivot.position.set(-2, 0, 0); // Position at red x-axis line
+
+    orangeLinePivot.position.set(-2, -1, 0); // Position at orange disk center (shifted down by 1)
     sceneGroup.add(orangeLinePivot);
     
 
@@ -378,7 +386,9 @@ function initThreeScene() {
     const orangeLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const orangeLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLineUpper = new THREE.Mesh(orangeLineUpperGeometry, orangeLineUpperMaterial);
-    orangeLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
+
+
+    orangeLineUpper.position.set(0, 1.25, 0); // Position so bottom touches y=-1 (pivot location) relative to pivot, 0.2 units higher
     orangeLinePivot.add(orangeLineUpper); // Add as child of pivot
     
     // Add lighting for better visibility
@@ -414,16 +424,23 @@ function rotateLineX(line, degrees) {
     renderer.render(scene, camera);
 }
 
+
 // Setup slider controls
 function setupControls() {
+
     const xSlider = document.getElementById('x-axis');
     const ySlider = document.getElementById('y-axis');
     const zSlider = document.getElementById('z-axis');
+    const zoomSlider = document.getElementById('zoom-axis');
+    const tiltSlider = document.getElementById('tilt-axis');
     
     const xValue = xSlider.nextElementSibling;
     const yValue = ySlider.nextElementSibling;
     const zValue = zSlider.nextElementSibling;
+    const zoomValue = zoomSlider.nextElementSibling;
+    const tiltValue = tiltSlider.nextElementSibling;
     
+
     // Update rotation when sliders change
     function updateRotation() {
         const pitch = parseFloat(xSlider.value);
@@ -446,14 +463,54 @@ function setupControls() {
         renderer.render(scene, camera);
     }
     
+
+    // Update zoom when zoom slider changes
+    function updateZoom() {
+        const zoom = parseFloat(zoomSlider.value);
+        
+        // Move camera along z-axis based on zoom value
+        camera.position.z = zoom;
+        camera.lookAt(0, 0, 0);
+        
+        // Update display value
+        zoomValue.textContent = zoom.toFixed(1);
+        
+        // Re-render scene
+        renderer.render(scene, camera);
+    }
+    
+    // Update tilt when tilt slider changes
+    function updateTilt() {
+        const tilt = parseFloat(tiltSlider.value);
+        
+        // Adjust camera's y-position for tilt effect
+        camera.position.y = tilt;
+        camera.lookAt(0, 0, 0);
+        
+        // Update display value
+        tiltValue.textContent = tilt.toFixed(1);
+        
+        // Re-render scene
+        renderer.render(scene, camera);
+    }
+    
+
+
     // Add event listeners to all sliders
     xSlider.addEventListener('input', updateRotation);
     ySlider.addEventListener('input', updateRotation);
     zSlider.addEventListener('input', updateRotation);
+    zoomSlider.addEventListener('input', updateZoom);
+    tiltSlider.addEventListener('input', updateTilt);
     
-
     // Initialize rotation
     updateRotation();
+    
+    // Initialize zoom
+    updateZoom();
+    
+    // Initialize tilt
+    updateTilt();
     
 
     // Setup color circle rotation controls
