@@ -5,6 +5,7 @@
 ## Objective
 Modify black lines so that only the part above the red x-axis line rotates, while the part below stays stationary (creating a hinge effect at the red point).
 
+
 ## Implementation Status: ✅ COMPLETED AND CORRECTED
 
 ### Changes Made:
@@ -45,6 +46,26 @@ For each black line:
 - Each black line has a stationary lower portion and a rotatable upper portion
 - Hinge effect properly created at the red x-axis line (y=0)
 - Upper parts correctly positioned relative to pivot points
+
+
+### 7. Update Yellow Line Length ✅
+- Update the bottom yellow line length to match the bottom grey line length.
+- Update `yellowLineLowerGeometry` height from `3` to `3.6`.
+- Update `yellowLine.position.set` Y-coordinate from `-1.7` to `-2.0`.
+
+
+
+### 8. Update Light Green Line Length ✅
+- Update the bottom light green line length to match the bottom grey line length.
+- Update `lightGreenLineLowerGeometry` height from `3` to `3.6`.
+- Update `lightGreenLine.position.set` Y-coordinate from `-1.7` to `-2.0`.
+
+
+
+### 9. Update Dark Green Line Length ✅
+- Update the bottom dark green line length to match the bottom grey line length.
+- Update `darkGreenLineLowerGeometry` height from `2.1` to `3.6`.
+- Update `darkGreenLine.position.set` Y-coordinate from `-1.25` to `-2.0`.
 
 ## Files Modified
 - `dataglove.js` - Main implementation file (completed and corrected)
