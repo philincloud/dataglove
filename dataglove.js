@@ -1,4 +1,4 @@
-
+ange or
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -157,7 +157,8 @@ function initThreeScene() {
     // Point at the beginning of the line (x = -2)
     const redPoint1 = new THREE.Mesh(axisPointGeometry, axisPointMaterial);
 
-    redPoint1.position.set(-2, -1, 0); // Red point for orange disk, shifted down by 1
+
+    redPoint1.position.set(-2, -1.5, 0); // Red point for orange disk, shifted down by 1.5
     sceneGroup.add(redPoint1);
     
     // Point at 1/4 of the line length (x = -1)
@@ -350,7 +351,8 @@ function initThreeScene() {
     const orangeDiskMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
     orangeDisk = new THREE.Mesh(orangeDiskGeometry, orangeDiskMaterial);
 
-    orangeDisk.position.set(-2, -1, 0); // Center on the beginning point of red axis, shifted down by 1
+
+    orangeDisk.position.set(-2, -1.5, 0); // Center on the beginning point of red axis, shifted down by 1.5
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     orangeDisk.userData.originalColor = new THREE.Color(0xffa500);
     orangeDisk.visible = false; // Hidden by default
@@ -375,13 +377,15 @@ function initThreeScene() {
     orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
 
 
-    orangeLine.position.set(-2, -2.25, 0); // Position so top touches y=-1 (shifted down by 1.2 total)
+
+    orangeLine.position.set(-2, -2.75, 0); // Position so top touches y=-1.5 (shifted down by 1.7 total)
     sceneGroup.add(orangeLine);
     
     // Create pivot point at y=0 (red x-axis line)
     orangeLinePivot = new THREE.Group();
 
-    orangeLinePivot.position.set(-2, -1, 0); // Position at orange disk center (shifted down by 1)
+
+    orangeLinePivot.position.set(-2, -1.5, 0); // Position at orange disk center (shifted down by 1.5)
     sceneGroup.add(orangeLinePivot);
     
 
@@ -393,7 +397,8 @@ function initThreeScene() {
     orangeLineUpper = new THREE.Mesh(orangeLineUpperGeometry, orangeLineUpperMaterial);
 
 
-    orangeLineUpper.position.set(0, 1.25, 0); // Position so bottom touches y=-1 (pivot location) relative to pivot, 0.2 units higher
+
+    orangeLineUpper.position.set(0, 1.25, 0); // Position so bottom touches y=-1.5 (pivot location) relative to pivot, 0.2 units higher
     orangeLinePivot.add(orangeLineUpper); // Add as child of pivot
     
     // Add lighting for better visibility
