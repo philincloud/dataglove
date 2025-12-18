@@ -1,3 +1,4 @@
+
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -51,12 +52,15 @@ function initThreeScene() {
 
 
 
+
     // Create white disk with minimal thickness (X,Y surface)
     const diskGeometry = new THREE.CylinderGeometry(2, 2, 0.01, 32);
     const diskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     circle = new THREE.Mesh(diskGeometry, diskMaterial);
+    circle.visible = false; // Hidden by default
     sceneGroup.add(circle);
     
+
 
 
     // Create light grey disk in Y,Z surface (perpendicular to X-axis)
@@ -64,8 +68,10 @@ function initThreeScene() {
     const disk2Material = new THREE.MeshBasicMaterial({ color: 0xcccccc });
     circle2 = new THREE.Mesh(disk2Geometry, disk2Material);
     circle2.rotation.x = Math.PI / 2; // Rotate to align with Y,Z surface
+    circle2.visible = false; // Hidden by default
     sceneGroup.add(circle2);
     
+
 
 
 
@@ -76,6 +82,7 @@ function initThreeScene() {
     circle3 = new THREE.Mesh(disk3Geometry, disk3Material);
     circle3.rotation.z = Math.PI / 2; // Rotate to align with X,Z surface
     circle3.userData.originalColor = new THREE.Color(0x999999);
+    circle3.visible = false; // Hidden by default
     sceneGroup.add(circle3);
     
 
@@ -83,8 +90,10 @@ function initThreeScene() {
     // Create vertical line through dark grey disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
+
+
     // Lower part: fixed from y=0 to y=-3.6 (half of 7.2)
-    const darkGreyLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3.6, 16);
+    const darkGreyLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3.6, 16);
     const darkGreyLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreyLine = new THREE.Mesh(darkGreyLineLowerGeometry, darkGreyLineMaterial);
     darkGreyLine.position.set(0, -1.8, 0); // Position so top touches y=0
@@ -96,8 +105,10 @@ function initThreeScene() {
     sceneGroup.add(darkGreyLinePivot);
     
 
+
+
     // Upper part: rotatable from y=0 to y=3.6 (half of 7.2)
-    const darkGreyLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3.6, 16);
+    const darkGreyLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3.6, 16);
     const darkGreyLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreyLineUpper = new THREE.Mesh(darkGreyLineUpperGeometry, darkGreyLineUpperMaterial);
     darkGreyLineUpper.position.set(0, 1.8, 0); // Position so bottom touches y=0 relative to pivot
@@ -168,6 +179,7 @@ function initThreeScene() {
 
 
 
+
     // Create yellow disk centered on the red point at 1/4 of red axis (x = -1)
     // Surface parallel to y/z plane
     const yellowDiskGeometry = new THREE.CylinderGeometry(3, 3, 0.01, 32);
@@ -176,6 +188,7 @@ function initThreeScene() {
     yellowDisk.position.set(-1, 0, 0); // Center on the 1/4 point of red axis
     yellowDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     yellowDisk.userData.originalColor = new THREE.Color(0xffff00);
+    yellowDisk.visible = false; // Hidden by default
     sceneGroup.add(yellowDisk);
     
 
@@ -189,8 +202,10 @@ function initThreeScene() {
     // Create vertical line through yellow disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
+
+
     // Lower part: fixed from y=0 to y=-3 (half of 6)
-    const yellowLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const yellowLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const yellowLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     yellowLine = new THREE.Mesh(yellowLineLowerGeometry, yellowLineMaterial);
     yellowLine.position.set(-1, -1.5, 0); // Position so top touches y=0
@@ -202,13 +217,16 @@ function initThreeScene() {
     sceneGroup.add(yellowLinePivot);
     
 
+
+
     // Upper part: rotatable from y=0 to y=3 (half of 6)
-    const yellowLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const yellowLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const yellowLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     yellowLineUpper = new THREE.Mesh(yellowLineUpperGeometry, yellowLineUpperMaterial);
     yellowLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
     yellowLinePivot.add(yellowLineUpper); // Add as child of pivot
     
+
 
 
 
@@ -221,6 +239,7 @@ function initThreeScene() {
     lightGreenDisk.position.set(1, 0, 0); // Center on the 3/4 point of red axis
     lightGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     lightGreenDisk.userData.originalColor = new THREE.Color(0x90ee90);
+    lightGreenDisk.visible = false; // Hidden by default
     sceneGroup.add(lightGreenDisk);
     
 
@@ -234,8 +253,10 @@ function initThreeScene() {
     // Create vertical line through light green disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
+
+
     // Lower part: fixed from y=0 to y=-3 (half of 6)
-    const lightGreenLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const lightGreenLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const lightGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     lightGreenLine = new THREE.Mesh(lightGreenLineLowerGeometry, lightGreenLineMaterial);
     lightGreenLine.position.set(1, -1.5, 0); // Position so top touches y=0
@@ -247,13 +268,16 @@ function initThreeScene() {
     sceneGroup.add(lightGreenLinePivot);
     
 
+
+
     // Upper part: rotatable from y=0 to y=3 (half of 6)
-    const lightGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 3, 16);
+    const lightGreenLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const lightGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     lightGreenLineUpper = new THREE.Mesh(lightGreenLineUpperGeometry, lightGreenLineUpperMaterial);
     lightGreenLineUpper.position.set(0, 1.5, 0); // Position so bottom touches y=0 relative to pivot
     lightGreenLinePivot.add(lightGreenLineUpper); // Add as child of pivot
     
+
 
 
 
@@ -266,6 +290,7 @@ function initThreeScene() {
     darkGreenDisk.position.set(2, 0, 0); // Center on the end point of red axis
     darkGreenDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     darkGreenDisk.userData.originalColor = new THREE.Color(0x006400);
+    darkGreenDisk.visible = false; // Hidden by default
     sceneGroup.add(darkGreenDisk);
     
 
@@ -279,8 +304,10 @@ function initThreeScene() {
     // Create vertical line through dark green disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
+
+
     // Lower part: fixed from y=0 to y=-2.1 (half of 4.2)
-    const darkGreenLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const darkGreenLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const darkGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreenLine = new THREE.Mesh(darkGreenLineLowerGeometry, darkGreenLineMaterial);
     darkGreenLine.position.set(2, -1.05, 0); // Position so top touches y=0
@@ -292,8 +319,10 @@ function initThreeScene() {
     sceneGroup.add(darkGreenLinePivot);
     
 
+
+
     // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
-    const darkGreenLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const darkGreenLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const darkGreenLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreenLineUpper = new THREE.Mesh(darkGreenLineUpperGeometry, darkGreenLineUpperMaterial);
     darkGreenLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
@@ -301,6 +330,7 @@ function initThreeScene() {
     
 
     
+
 
 
 
@@ -313,6 +343,7 @@ function initThreeScene() {
     orangeDisk.position.set(-2, 0, 0); // Center on the beginning point of red axis
     orangeDisk.rotation.z = Math.PI / 2; // Rotate to make surface parallel to y/z plane
     orangeDisk.userData.originalColor = new THREE.Color(0xffa500);
+    orangeDisk.visible = false; // Hidden by default
     sceneGroup.add(orangeDisk);
     
 
@@ -326,8 +357,10 @@ function initThreeScene() {
     // Create vertical line through orange disk center (along y-axis)
     // Split into lower (fixed) and upper (rotatable) parts with hinge at y=0
     
+
+
     // Lower part: fixed from y=0 to y=-2.1 (half of 4.2)
-    const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
     orangeLine.position.set(-2, -1.05, 0); // Position so top touches y=0
@@ -339,8 +372,10 @@ function initThreeScene() {
     sceneGroup.add(orangeLinePivot);
     
 
+
+
     // Upper part: rotatable from y=0 to y=2.1 (half of 4.2)
-    const orangeLineUpperGeometry = new THREE.CylinderGeometry(0.04, 0.04, 2.1, 16);
+    const orangeLineUpperGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const orangeLineUpperMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLineUpper = new THREE.Mesh(orangeLineUpperGeometry, orangeLineUpperMaterial);
     orangeLineUpper.position.set(0, 1.05, 0); // Position so bottom touches y=0 relative to pivot
@@ -514,8 +549,9 @@ function setupCheckboxControls() {
             }
         });
         
-        // Set default state (checked)
-        checkbox.checked = true;
+
+        // Set default state (unchecked)
+        checkbox.checked = false;
     });
 }
 
