@@ -1,4 +1,3 @@
-ange or
 // Simple vanilla JavaScript dataglove functionality
 
 function datagloveInit() {
@@ -411,7 +410,8 @@ function initThreeScene() {
     
     // Camera position
     camera.position.z = 6;
-    camera.position.y = 2;
+
+    camera.position.y = 0;
     camera.lookAt(0, 0, 0);
     
     // Render the scene
