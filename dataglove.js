@@ -96,7 +96,8 @@ function initThreeScene() {
     const darkGreyLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3.6, 16);
     const darkGreyLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreyLine = new THREE.Mesh(darkGreyLineLowerGeometry, darkGreyLineMaterial);
-    darkGreyLine.position.set(0, -1.8, 0); // Position so top touches y=0
+
+    darkGreyLine.position.set(0, -2.0, 0); // Position so top touches y=0, shifted down 0.2 units
     sceneGroup.add(darkGreyLine);
     
     // Create pivot point at y=0 (red x-axis line)
@@ -210,7 +211,8 @@ function initThreeScene() {
     const yellowLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const yellowLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     yellowLine = new THREE.Mesh(yellowLineLowerGeometry, yellowLineMaterial);
-    yellowLine.position.set(-1, -1.5, 0); // Position so top touches y=0
+
+    yellowLine.position.set(-1, -1.7, 0); // Position so top touches y=0, shifted down 0.2 units
     sceneGroup.add(yellowLine);
     
     // Create pivot point at y=0 (red x-axis line)
@@ -262,7 +264,8 @@ function initThreeScene() {
     const lightGreenLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 3, 16);
     const lightGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     lightGreenLine = new THREE.Mesh(lightGreenLineLowerGeometry, lightGreenLineMaterial);
-    lightGreenLine.position.set(1, -1.5, 0); // Position so top touches y=0
+
+    lightGreenLine.position.set(1, -1.7, 0); // Position so top touches y=0, shifted down 0.2 units
     sceneGroup.add(lightGreenLine);
     
     // Create pivot point at y=0 (red x-axis line)
@@ -314,7 +317,8 @@ function initThreeScene() {
     const darkGreenLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
     const darkGreenLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     darkGreenLine = new THREE.Mesh(darkGreenLineLowerGeometry, darkGreenLineMaterial);
-    darkGreenLine.position.set(2, -1.05, 0); // Position so top touches y=0
+
+    darkGreenLine.position.set(2, -1.25, 0); // Position so top touches y=0, shifted down 0.2 units
     sceneGroup.add(darkGreenLine);
     
     // Create pivot point at y=0 (red x-axis line)
@@ -370,7 +374,8 @@ function initThreeScene() {
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
 
-    orangeLine.position.set(-2, -2.05, 0); // Position so top touches y=-1 (shifted down by 1)
+
+    orangeLine.position.set(-2, -2.25, 0); // Position so top touches y=-1 (shifted down by 1.2 total)
     sceneGroup.add(orangeLine);
     
     // Create pivot point at y=0 (red x-axis line)
