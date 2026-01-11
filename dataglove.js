@@ -390,14 +390,14 @@ function initThreeScene() {
 
 
 
-    orangeLine.position.set(-2, -2.75, 0); // Position so top touches y=-1.5 (shifted down by 1.7 total)
+    orangeLine.position.set(-2, -2.75, 0); // Position with 0.2 gap from pivot (top = -1.91, pivot = -1.71)
     sceneGroup.add(orangeLine);
     
     // Create pivot point at y=0 (red x-axis line)
     orangeLinePivot = new THREE.Group();
 
 
-    orangeLinePivot.position.set(-2, -1.5, 0); // Position at orange disk center (shifted down by 1.5)
+    orangeLinePivot.position.set(-2, -1.71, 0); // Position to create 0.2 gap from lower line top
     sceneGroup.add(orangeLinePivot);
     
 
