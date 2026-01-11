@@ -383,8 +383,8 @@ function initThreeScene() {
     
 
 
-    // Lower part: fixed from y=0 to y=-2.1 (half of 4.2)
-    const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 2.1, 16);
+    // Lower part: fixed from y=0 to y=-1.68 (20% shorter, half of 3.36)
+    const orangeLineLowerGeometry = new THREE.CylinderGeometry(0.32, 0.32, 1.68, 16);
     const orangeLineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLine = new THREE.Mesh(orangeLineLowerGeometry, orangeLineMaterial);
 
@@ -406,32 +406,32 @@ function initThreeScene() {
 
 
     // Upper part: split into middle and top parts with new pivot
-    // Middle part: rotatable from y=0 to y=1.2 (0.2 gap + 1.2 length)
-    const orangeLineMiddleGeometry = new THREE.CylinderGeometry(0.32, 0.32, 1.2, 16);
+    // Middle part: rotatable from y=0 to y=0.96 (20% shorter, 0.2 gap + 0.96 length)
+    const orangeLineMiddleGeometry = new THREE.CylinderGeometry(0.32, 0.32, 0.96, 16);
     const orangeLineMiddleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLineMiddle = new THREE.Mesh(orangeLineMiddleGeometry, orangeLineMiddleMaterial);
 
-    orangeLineMiddle.position.set(0, 0.8, 0); // Position: 0.2 gap + 0.6 center = 0.8
+    orangeLineMiddle.position.set(0, 0.68, 0); // Position: 0.2 gap + 0.48 center = 0.68
     orangeLinePivot.add(orangeLineMiddle); // Add as child of pivot
 
     // Create new pivot point for top part at 0.2 units above middle part
     orangeLineTopPivot = new THREE.Group();
-    orangeLineTopPivot.position.set(0, 1.6, 0); // Position at end of middle part + 0.2 gap
+    orangeLineTopPivot.position.set(0, 1.36, 0); // Position at end of middle part + 0.2 gap
     orangeLinePivot.add(orangeLineTopPivot);
 
     // Create red point at the new pivot location
     const orangeTopPointGeometry = new THREE.SphereGeometry(0.12, 16, 16);
     const orangeTopPointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     const orangeTopRedPoint = new THREE.Mesh(orangeTopPointGeometry, orangeTopPointMaterial);
-    orangeTopRedPoint.position.set(0, 1.6, 0); // Position at new pivot relative to first pivot
+    orangeTopRedPoint.position.set(0, 1.36, 0); // Position at new pivot relative to first pivot
     orangeLinePivot.add(orangeTopRedPoint);
 
-    // Top part: rotatable from y=0 to y=0.9 (0.2 gap + 0.9 length)
-    const orangeLineTopGeometry = new THREE.CylinderGeometry(0.32, 0.32, 0.9, 16);
+    // Top part: rotatable from y=0 to y=0.72 (20% shorter, 0.2 gap + 0.72 length)
+    const orangeLineTopGeometry = new THREE.CylinderGeometry(0.32, 0.32, 0.72, 16);
     const orangeLineTopMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
     orangeLineTop = new THREE.Mesh(orangeLineTopGeometry, orangeLineTopMaterial);
 
-    orangeLineTop.position.set(0, 0.65, 0); // Position: 0.2 gap + 0.45 center = 0.65
+    orangeLineTop.position.set(0, 0.56, 0); // Position: 0.2 gap + 0.36 center = 0.56
     orangeLineTopPivot.add(orangeLineTop); // Add as child of new pivot
     
     // Add lighting for better visibility
